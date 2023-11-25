@@ -38,6 +38,17 @@ class SnakeConventions implements IDbConvention
     }
 
     /**
+     * Return foreign key name as (classname in snake case)_id
+     * @param string $className Class name of a model
+     * @return string
+     */
+    public function getFkColumn(string $className)
+    {
+        $arr = explode("\\", $className);
+        return strtolower($this->toSnakeCase(end($arr))) . "_id";
+    }
+
+    /**
      * Returns the DB column name, the name is converted to snake case
      * @param string $propertyName Name of a model property
      * @return string

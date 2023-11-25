@@ -36,6 +36,17 @@ class DefaultConventions implements IDbConvention
     }
 
     /**
+     * Return foreign key name as (classname)Id
+     * @param string $className Class name of a model
+     * @return string
+     */
+    public function getFkColumn(string $className)
+    {
+        $arr = explode("\\", $className);
+        return lcfirst(end($arr)) . "Id";
+    }
+
+    /**
      * Returns the DB column name, the name is the same as the property name
      * @param string $propertyName Name of a model property
      * @return string
